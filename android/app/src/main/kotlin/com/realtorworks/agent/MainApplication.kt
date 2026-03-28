@@ -7,7 +7,7 @@ import com.moengage.core.MoEngage
 import com.moengage.core.config.LogConfig
 import com.moengage.core.config.MoEngageEnvironmentConfig
 import com.moengage.core.model.environment.MoEngageEnvironment
-import com.moengage.flutter.MoEInitializer.Companion.initialiseDefaultInstance
+import com.moengage.flutter.MoEInitializer
 
 class MainApplication : Application() {
 
