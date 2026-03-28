@@ -14,10 +14,10 @@ workflows:
           echo "✅ local.properties:"
           cat "$CM_BUILD_DIR/android/local.properties"
       - name: Write google-services.json
-        script: |
-          echo $GOOGLE_SERVICES_JSON | base64 --decode > "$CM_BUILD_DIR/android/app/google-services.json"
-          echo "✅ google-services.json written"
-          cat "$CM_BUILD_DIR/android/app/google-services.json" | head -3
+              script: |
+                cp $GOOGLE_SERVICES_JSON "$CM_BUILD_DIR/android/app/google-services.json"
+                echo "✅ google-services.json copied"
+                cat "$CM_BUILD_DIR/android/app/google-services.json" | head -3
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build debug APK
