@@ -24,9 +24,10 @@ workflows:
         script: flutter pub get
 
       - name: Build debug APK
-        script: |
-          cd android
-          ./gradlew assembleDebug
+              script: |
+                cd android
+                chmod +x gradlew
+                ./gradlew assembleDebug
 
     artifacts:
       - build/app/outputs/apk/debug/*.apk
