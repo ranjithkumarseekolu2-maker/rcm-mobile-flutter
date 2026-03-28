@@ -12,7 +12,40 @@ workflows:
           echo "flutter.versionCode=1" >> "$CM_BUILD_DIR/android/local.properties"
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> "$CM_BUILD_DIR/android/local.properties"
       - name: Write google-services.json
-        script: cp $GOOGLE_SERVICES_JSON "$CM_BUILD_DIR/android/app/google-services.json"
+        script: |
+          cat > "$CM_BUILD_DIR/android/app/google-services.json" << 'EOF'
+          {
+            "project_info": {
+              "project_number": "338627372093",
+              "project_id": "realtorworks-89f65",
+              "storage_bucket": "realtorworks-89f65.appspot.com"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:338627372093:android:ae7d3b9c6d6efa89d57654",
+                  "android_client_info": {
+                    "package_name": "com.realtorworks.agent"
+                  }
+                },
+                "oauth_client": [],
+                "api_key": [
+                  {
+                    "current_key": "AIzaSyA8OXRuLAGDZYBwC3pv2vDrN5BPBIn80Ic"
+                  }
+                ],
+                "services": {
+                  "appinvite_service": {
+                    "other_platform_oauth_client": []
+                  }
+                }
+              }
+            ],
+            "configuration_version": "1"
+          }
+          EOF
+          echo "✅ google-services.json written"
+          head -3 "$CM_BUILD_DIR/android/app/google-services.json"
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build debug APK
