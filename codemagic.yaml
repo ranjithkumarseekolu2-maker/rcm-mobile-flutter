@@ -44,15 +44,13 @@ workflows:
             "configuration_version": "1"
           }
           EOF
-          echo "✅ google-services.json written"
-          head -3 "$CM_BUILD_DIR/android/app/google-services.json"
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build debug APK
         script: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew clean assembleDebug --stacktrace 2>&1 | tail -80
     artifacts:
       - build/app/outputs/apk/debug/*.apk
     publishing:
