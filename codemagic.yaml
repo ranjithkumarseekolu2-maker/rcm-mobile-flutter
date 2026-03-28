@@ -4,7 +4,6 @@ workflows:
     max_build_duration: 60
     environment:
       flutter: 3.24.5
-
     scripts:
       - name: Create local.properties
         script: |
@@ -14,24 +13,19 @@ workflows:
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> "$CM_BUILD_DIR/android/local.properties"
           echo "✅ local.properties:"
           cat "$CM_BUILD_DIR/android/local.properties"
-
       - name: Write google-services.json
         script: |
           echo $GOOGLE_SERVICES_JSON > "$CM_BUILD_DIR/android/app/google-services.json"
           echo "✅ google-services.json written"
-
       - name: Get Flutter packages
         script: flutter pub get
-
       - name: Build debug APK
-              script: |
-                cd android
-                chmod +x gradlew
-                ./gradlew assembleDebug
-
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
     artifacts:
       - build/app/outputs/apk/debug/*.apk
-
     publishing:
       email:
         recipients:
