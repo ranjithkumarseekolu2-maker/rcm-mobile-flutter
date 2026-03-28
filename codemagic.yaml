@@ -1,0 +1,43 @@
+workflows:
+  android-debug:
+    name: Android Debug Build
+    max_build_duration: 60
+    environment:
+      flutter: 3.24.5
+      android_signing:
+        - keystore_reference
+    vars:
+      PACKAGE_NAME: "com.realtorworks.agent"
+    scripts:
+      - name: Create local.properties
+        script: |
+          echo "flutter.sdk=$FLUTTER_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+          echo "flutter.versionName=1.0.0" >> "$CM_BUILD_DIR/android/local.properties"
+          echo "flutter.versionCode=1" >> "$CM_BUILD_DIR/android/local.properties"
+          echo "sdk.dir=$ANDROID_SDK_ROOT" >> "$CM_BUILD_DIR/android/local.properties"
+          echo "✅ local.properties:"
+          cat "$CM_BUILD_DIR/android/local.properties"
+
+      - name: Write google-services.json
+        script: |
+          echo $GOOGLE_SERVICES_JSON > "$CM_BUILD_DIR/android/app/google-services.json"
+          echo "✅ google-services.json written"
+
+      - name: Get Flutter packages
+        script: flutter pub get
+
+      - name: Build debug APK
+        script: |
+          cd android
+          ./gradlew assembleDebug
+
+    artifacts:
+      - build/app/outputs/apk/debug/*.apk
+
+    publishing:
+      email:
+        recipients:
+          - ranjithkumarseekolu2@gmail.com
+        notify:
+          success: true
+          failure: true
