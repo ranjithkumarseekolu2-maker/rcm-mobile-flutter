@@ -76,14 +76,3 @@ workflows:
         notify:
           success: true
           failure: true
-```
-
-Commit this, rebuild, then paste the output of **"Create local.properties"** step specifically. I need to see:
-```
-=== FLUTTER_ROOT is: /path/to/flutter ===
-=== ANDROID_SDK_ROOT is: /path/to/android/sdk ===
-=== local.properties contents: ===
-flutter.sdk=/path/to/flutter
-...
-=== Flutter gradle tools exist: ===
-(list of files)
