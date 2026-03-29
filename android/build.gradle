@@ -4,19 +4,11 @@ buildscript {
         google()
         mavenCentral()
     }
-
     dependencies {
-        implementation platform('com.google.firebase:firebase-bom:32.7.0')
-        implementation 'com.google.firebase:firebase-crashlytics'
-        implementation 'com.google.firebase:firebase-analytics'
-        implementation 'com.moengage:moe-android-sdk:13.05.00'
-        implementation 'androidx.core:core:1.6.0'
-        implementation 'androidx.appcompat:appcompat:1.3.1'
-        implementation 'androidx.lifecycle:lifecycle-process:2.7.0'
-    
-        // ADD THESE TWO LINES
-        implementation 'com.moengage:moe-android-sdk:13.05.00'
-        implementation "io.flutter:flutter_embedding_debug:1.0.0-3.24.5"
+        classpath 'com.android.tools.build:gradle:8.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.4.0'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
     }
 }
 
