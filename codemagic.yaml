@@ -11,6 +11,11 @@ workflows:
           echo "flutter.versionName=1.0.0" >> "$CM_BUILD_DIR/android/local.properties"
           echo "flutter.versionCode=1" >> "$CM_BUILD_DIR/android/local.properties"
           echo "sdk.dir=$ANDROID_SDK_ROOT" >> "$CM_BUILD_DIR/android/local.properties"
+          echo "=== Verifying Flutter SDK ==="
+          echo "FLUTTER_ROOT=$FLUTTER_ROOT"
+          ls "$FLUTTER_ROOT/packages/flutter_tools/gradle/" | head -5
+          echo "=== local.properties ==="
+          cat "$CM_BUILD_DIR/android/local.properties"
       - name: Write google-services.json
         script: |
           cat > "$CM_BUILD_DIR/android/app/google-services.json" << 'EOF'
@@ -50,6 +55,8 @@ workflows:
           cat "$CM_BUILD_DIR/android/app/src/main/kotlin/com/realtorworks/agent/MainActivity.kt"
           echo "=== MainApplication.kt ==="
           cat "$CM_BUILD_DIR/android/app/src/main/kotlin/com/realtorworks/agent/MainApplication.kt"
+          echo "=== settings.gradle ==="
+          cat "$CM_BUILD_DIR/android/settings.gradle"
       - name: Get Flutter packages
         script: flutter pub get
       - name: Build debug APK
